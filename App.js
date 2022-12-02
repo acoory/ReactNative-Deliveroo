@@ -53,7 +53,6 @@ export default function App() {
     setDataRate(result);
   };
 
-  //create function random restaurant and setUne
   const randomRestaurant = () => {
     const result = Restaurant.sort(() => 0.5 - Math.random()).slice(0, 5);
     setDateUne(result);
