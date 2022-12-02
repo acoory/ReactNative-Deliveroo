@@ -4,7 +4,7 @@ Job board project allowing users to apply for jobs and companies to publish thei
 
 ## Screenshots
 
-<img src="https://i.ibb.co/3p47JHd/deliveroo.gif" width="300"/>
+<img width="200" alt="Capture-d-e-cran-2022-11-29-a-12-26-52" src="https://i.ibb.co/3p47JHd/deliveroo.gif">
 
 ## Installation
 
