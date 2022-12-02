@@ -4,7 +4,7 @@ Job board project allowing users to apply for jobs and companies to publish thei
 
 ## Screenshots
 
-<img src="https://i.ibb.co/zJJndBc/ezgif-com-gif-maker.gif" width="300"/>
+<img src="https://github.com/acoory/RN-Deliveroo/assets/deliveroo.gif" width="300"/>
 
 ## Installation
 
