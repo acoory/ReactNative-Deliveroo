@@ -1,6 +1,6 @@
 # Clone Deliveroo - Application React Native
 
-Ce projet est un clone de l'application **Deliveroo** développé en **React Native**. Il s'agit d'une application mobile permettant de simuler la commande de repas en ligne, en utilisant une interface utilisateur similaire à celle de Deliveroo pour s'exercer et améliorer les compétences en développement mobile.
+Ce projet a été créé dans le but de m'améliorer dans la reproduction d'interfaces en **React Native**. Il s'agit d'un clone de l'application **Deliveroo**, permettant de simuler la commande de repas en ligne, tout en offrant une interface utilisateur similaire à celle de Deliveroo pour m'exercer et affiner mes compétences en développement mobile.
 
 ## Aperçu
 
