@@ -5,10 +5,10 @@ workflows:
     instance_type: mac_mini_m1
 
     environment:
-      android_signing:
-        - keystore_reference
-      groups:
-        - google_play
+      # android_signing:
+      #   - keystore_reference
+      # groups:
+      #   - google_play
       vars:
         PACKAGE_NAME: "com.leboncoin.deliveroo"
       node: 18.17.0
