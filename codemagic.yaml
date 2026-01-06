@@ -2,12 +2,22 @@ workflows:
   android-workflow:
     name: Android CI Test
     max_build_duration: 60
+
     environment:
       vars:
         JAVA_VERSION: 17
+        NODE_VERSION: 18
+
     scripts:
+      # 🔹 S'assurer d'être dans le bon dossier du projet
+      - cd clone
+
+      # 🔹 Installer les dépendances JS
       - yarn install
+
+      # 🔹 Build Android
       - cd android
       - ./gradlew assembleDebug
+
     artifacts:
-      - android/app/build/outputs/**/*.apk
+      - clone/android/app/build/outputs/**/*.apk
