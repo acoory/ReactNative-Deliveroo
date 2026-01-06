@@ -31,10 +31,16 @@ workflows:
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
 
+      - name: Clean Gradle cache and corrupted downloads
+        script: |
+          cd android
+          rm -rf node_modules/expo-modules-core/android/build/downloads
+          ./gradlew clean --no-daemon
+
       - name: Build Android Debug APK
         script: |
           cd android
-          ./gradlew assembleDebug --stacktrace
+          ./gradlew assembleDebug --no-daemon --stacktrace
 
     artifacts:
       - android/app/build/outputs/**/*.apk
