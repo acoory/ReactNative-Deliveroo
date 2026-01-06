@@ -1,20 +1,13 @@
 workflows:
   android-workflow:
-    name: Android Build Test
-    max_build_duration: 60
-    instance_type: mac_mini_m1
+    name: React Native Android Test Build
+    max_build_duration: 120
+    instance_type: linux_x2
 
     environment:
-      # android_signing:
-      #   - keystore_reference
-      # groups:
-      #   - google_play
       vars:
         PACKAGE_NAME: "com.leboncoin.deliveroo"
       node: 18.17.0
-      java: 17
-      xcode: latest
-      cocoapods: default
 
     triggering:
       events:
@@ -25,36 +18,26 @@ workflows:
           source: true
 
     scripts:
-      - name: Install npm dependencies
+      - name: Install dependencies and Expo CLI
         script: |
           npm install
-
-      - name: Install Expo CLI
-        script: |
-          npm install -g expo-cli eas-cli
+          npm install -g expo-cli
 
       - name: Prebuild Android with Expo
         script: |
           npx expo prebuild --platform android --clean
 
-      - name: Set up local.properties for Android
+      - name: Set Android SDK location
         script: |
-          echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
 
       - name: Build Android Debug APK
         script: |
           cd android
           ./gradlew assembleDebug --stacktrace
 
-      - name: Build Android Release APK (optional)
-        script: |
-          cd android
-          ./gradlew assembleRelease --stacktrace
-        ignore_failure: true
-
     artifacts:
       - android/app/build/outputs/**/*.apk
-      - android/app/build/outputs/**/*.aab
 
     publishing:
       email:
