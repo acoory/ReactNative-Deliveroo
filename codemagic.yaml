@@ -1,23 +1,65 @@
 workflows:
   android-workflow:
-    name: Android CI Test
+    name: Android Build Test
     max_build_duration: 60
+    instance_type: mac_mini_m1
 
     environment:
+      android_signing:
+        - keystore_reference
+      groups:
+        - google_play
       vars:
-        JAVA_VERSION: 17
-        NODE_VERSION: 18
+        PACKAGE_NAME: "com.leboncoin.deliveroo"
+      node: 18.17.0
+      java: 17
+      xcode: latest
+      cocoapods: default
+
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: "*"
+          include: true
+          source: true
 
     scripts:
-      # 🔹 S'assurer d'être dans le bon dossier du projet
-      - cd ReactNative-Deliveroo
+      - name: Install npm dependencies
+        script: |
+          npm install
 
-      # 🔹 Installer les dépendances JS
-      - yarn install
+      - name: Install Expo CLI
+        script: |
+          npm install -g expo-cli eas-cli
 
-      # 🔹 Build Android
-      - cd android
-      - ./gradlew assembleDebug
+      - name: Prebuild Android with Expo
+        script: |
+          npx expo prebuild --platform android --clean
+
+      - name: Set up local.properties for Android
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
+
+      - name: Build Android Debug APK
+        script: |
+          cd android
+          ./gradlew assembleDebug --stacktrace
+
+      - name: Build Android Release APK (optional)
+        script: |
+          cd android
+          ./gradlew assembleRelease --stacktrace
+        ignore_failure: true
 
     artifacts:
-      - clone/android/app/build/outputs/**/*.apk
+      - android/app/build/outputs/**/*.apk
+      - android/app/build/outputs/**/*.aab
+
+    publishing:
+      email:
+        recipients:
+          - anthonycory13@hotmail.com
+        notify:
+          success: true
+          failure: true
