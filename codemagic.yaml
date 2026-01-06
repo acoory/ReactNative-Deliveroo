@@ -10,7 +10,7 @@ workflows:
 
     scripts:
       # 🔹 S'assurer d'être dans le bon dossier du projet
-      - cd clone
+      - cd ReactNative-Deliveroo
 
       # 🔹 Installer les dépendances JS
       - yarn install
